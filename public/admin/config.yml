@@ -1,17 +1,14 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: xh79hvn7cw-stack/poptyping
   branch: main
+  base_url: https://decap-proxy.lousquinn.workers.dev
+  auth_endpoint: /auth
 
-# Where uploaded images are saved
 media_folder: "public/images"
 public_folder: "/images"
 
-# Show drafts in the admin so you can save without publishing
 publish_mode: editorial_workflow
-
-site_url: https://poptyping.netlify.app
-display_url: https://poptyping.netlify.app
-logo_url: https://poptyping.netlify.app/favicon.png
 
 collections:
   - name: "articles"
