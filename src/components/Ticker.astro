@@ -1,0 +1,23 @@
+---
+interface Props {
+  items?: string[];
+}
+
+const defaultItems = [
+  'Breaking — congress votes unanimously to keep being congress',
+  'Polls show 100% of voters polled responded to polling',
+  'Economy described as "good," "bad," and "complicated" by same analyst',
+  'Local man still convinced his side is winning',
+  'New study confirms studies are now also rigged',
+];
+
+const { items = defaultItems } = Astro.props;
+// Duplicate the items so the marquee animation loops seamlessly
+const doubled = [...items, ...items];
+---
+
+<div class="ticker">
+  <div class="ticker-track">
+    {doubled.map(item => <span>{item}</span>)}
+  </div>
+</div>

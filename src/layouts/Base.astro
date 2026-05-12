@@ -1,0 +1,105 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'poptyping — political satire that types loud', description = 'Political satire. All headlines fictitious. Resemblance regrettable.' } = Astro.props;
+
+const now = new Date();
+const dateString = now.toLocaleDateString('en-GB', { weekday: 'short', month: 'short', day: 'numeric' });
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="util-bar">
+  <div class="util-inner">
+    <div class="util-meta">
+      <span class="live">Live</span>
+      <span>{dateString}</span>
+    </div>
+    <div class="util-meta">
+      <span>Vol. 01</span>
+      <span>·</span>
+      <span>tips@poptyping.com</span>
+    </div>
+  </div>
+</div>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <a href="/" class="logo-big" aria-label="poptyping home">poptyping.</a>
+    <span class="masthead-hint">hover the logo</span>
+    <div class="masthead-strap">
+      <span>Political satire · Established 2026</span>
+      <span class="accent">★ ★ ★</span>
+      <span>"All headlines fictitious. Resemblance regrettable."</span>
+    </div>
+  </div>
+</header>
+
+<slot />
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">poptyping.</div>
+        <p class="footer-tag">Political satire. The headlines are fake. The dread is real.</p>
+      </div>
+      <div class="footer-col">
+        <h5>The Operation</h5>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="mailto:tips@poptyping.com">Tip Line</a></li>
+          <li><a href="mailto:hello@poptyping.com">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Follow</h5>
+        <ul>
+          <li><a href="#newsletter">Newsletter</a></li>
+          <li><a href="#">Twitter / X</a></li>
+          <li><a href="#">Bluesky</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© {now.getFullYear()} poptyping. All headlines fictitious. Resemblance to reality coincidental and regrettable.</span>
+      <span><a href="/privacy" style="color: var(--ink-faint); text-decoration: none;">Privacy</a> · <a href="/ethics" style="color: var(--ink-faint); text-decoration: none;">Ethics</a></span>
+    </div>
+  </div>
+</footer>
+
+<script is:inline>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

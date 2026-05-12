@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  href: string;
+  category: string;
+  headline: string;
+  date: Date;
+  heroImage?: any;
+  featured?: boolean;
+}
+
+const { href, category, headline, date, heroImage, featured = false } = Astro.props;
+const dateString = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+---
+
+<a href={href} class={`card ${featured ? 'feature' : ''}`}>
+  <div class={`card-image ${heroImage ? 'has-image' : ''}`}>
+    {heroImage && <Image src={heroImage} alt="" widths={[400, 800, 1200]} sizes="(max-width: 980px) 100vw, 33vw" />}
+  </div>
+  <div class="card-body">
+    <span class="card-tag">{category}</span>
+    <h3 set:html={headline} />
+    <div class="card-meta">
+      <span>{dateString}</span>
+    </div>
+  </div>
+</a>

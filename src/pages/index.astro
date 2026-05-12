@@ -1,0 +1,107 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import Ticker from '../components/Ticker.astro';
+import Newsletter from '../components/Newsletter.astro';
+
+const allArticles = (await getCollection('articles', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const total = allArticles.length;
+const leadArticle = total > 0 ? allArticles[0] : null;
+const alsoToday = allArticles.slice(1, 5);
+const gridArticles = allArticles.slice(5, 11);
+const longRead = allArticles.slice(11, 16);
+
+const fmtDate = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+const fmtFullDate = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+---
+
+<Base>
+
+  {total === 0 && (
+    <section class="empty-state">
+      <h2>No articles <em>yet</em>.</h2>
+      <p>Write your first one in the <a href="/admin/" style="color: var(--accent);">admin panel</a>.</p>
+    </section>
+  )}
+
+  {leadArticle && (
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div>
+            <div class="lead-tag">{leadArticle.data.category} · {fmtFullDate(leadArticle.data.date)}</div>
+            <h1 class="lead-headline" set:html={leadArticle.data.headline} />
+          </div>
+        </div>
+        <a href={`/${leadArticle.id}/`} class={`hero-image ${leadArticle.data.heroImage ? 'has-image' : ''}`}>
+          {leadArticle.data.heroImage && (
+            <Image src={leadArticle.data.heroImage} alt={leadArticle.data.headline.replace(/<[^>]+>/g, '')} widths={[800, 1200, 1600]} sizes="60vw" />
+          )}
+          {leadArticle.data.heroCaption && (
+            <span class="hero-image-caption">{leadArticle.data.heroCaption}</span>
+          )}
+        </a>
+      </div>
+    </section>
+  )}
+
+  {alsoToday.length > 0 && (
+    <section class="also-today">
+      <div class="also-today-inner">
+        {alsoToday.map(article => (
+          <a href={`/${article.id}/`} class="also-item">
+            <span class="meta">{fmtDate(article.data.date)}</span>
+            <h4 set:html={article.data.headline} />
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <Ticker />
+
+  {gridArticles.length > 0 && (
+    <section class="grid">
+      {gridArticles.map((article, i) => (
+        <ArticleCard
+          href={`/${article.id}/`}
+          category={article.data.category}
+          headline={article.data.headline}
+          date={article.data.date}
+          heroImage={article.data.heroImage}
+          featured={i === 0}
+        />
+      ))}
+    </section>
+  )}
+
+  {longRead.length > 0 && (
+    <section class="two-col">
+      <div class="col-main">
+        {longRead.map((article, i) => (
+          <a href={`/${article.id}/`} class="stack-item">
+            <div class="stack-num">{String(i + 1).padStart(2, '0')}</div>
+            <div class="stack-content">
+              <div class="tag">{article.data.category} · {fmtFullDate(article.data.date)}</div>
+              <h4 set:html={article.data.headline} />
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="col-side">
+        <h3>Pulled <em>quote</em></h3>
+        <div class="quote-block">
+          <p>"A short quote from one of your articles. Pull-quotes work great in satire — they're where you can isolate a single absurd line and let it ring."</p>
+          <cite>— from a recent piece</cite>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Newsletter />
+
+</Base>

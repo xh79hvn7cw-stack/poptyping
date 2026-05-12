@@ -1,0 +1,81 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Where uploaded images are saved
+media_folder: "public/images"
+public_folder: "/images"
+
+# Show drafts in the admin so you can save without publishing
+publish_mode: editorial_workflow
+
+site_url: https://poptyping.netlify.app
+display_url: https://poptyping.netlify.app
+logo_url: https://poptyping.netlify.app/favicon.png
+
+collections:
+  - name: "articles"
+    label: "Articles"
+    label_singular: "Article"
+    folder: "src/content/articles"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{headline}} — {{category}} — {{date}}"
+    sortable_fields: ['date', 'category', 'headline']
+    view_filters:
+      - label: "Drafts"
+        field: draft
+        pattern: true
+      - label: "Published"
+        field: draft
+        pattern: false
+      - label: "Featured"
+        field: featured
+        pattern: true
+    fields:
+      - label: "Headline"
+        name: "headline"
+        widget: "string"
+        hint: "Wrap the punchline word in <em>...</em> tags to make it italic + accent yellow."
+
+      - label: "Category"
+        name: "category"
+        widget: "string"
+        hint: "e.g. Capitol, Empire, Markets, Culture War — make them up as you go."
+
+      - label: "Date"
+        name: "date"
+        widget: "datetime"
+        default: ""
+        format: "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
+        date_format: "DD MMM YYYY"
+        time_format: "HH:mm"
+
+      - label: "Hero image"
+        name: "heroImage"
+        widget: "image"
+        required: false
+        hint: "Landscape orientation works best. ~1600px wide is plenty."
+
+      - label: "Hero image caption"
+        name: "heroCaption"
+        widget: "string"
+        required: false
+        hint: "Optional. Shown in the corner of the hero image."
+
+      - label: "Featured"
+        name: "featured"
+        widget: "boolean"
+        default: false
+        hint: "Currently not used for placement — newest article wins the lead slot. Reserved for future use."
+
+      - label: "Draft"
+        name: "draft"
+        widget: "boolean"
+        default: false
+        hint: "Drafts won't appear on the live site."
+
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        hint: "The article itself. Use ## for subheads, > for blockquotes."

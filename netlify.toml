@@ -1,0 +1,18 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Redirect /admin to /admin/ so trailing-slash convention holds
+[[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301
+
+# Catch-all 404 for missing pages
+[[redirects]]
+  from = "/*"
+  to = "/404"
+  status = 404
