@@ -31,12 +31,12 @@ const fmtFullDate = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric',
   {leadArticle && (
     <section class="hero">
       <div class="hero-inner">
-        <div class="hero-text">
+        <a href={`/${leadArticle.id}/`} class="hero-text">
           <div>
             <div class="lead-tag">{leadArticle.data.category} · {fmtFullDate(leadArticle.data.date)}</div>
             <h1 class="lead-headline" set:html={leadArticle.data.headline} />
           </div>
-        </div>
+        </a>
         <a href={`/${leadArticle.id}/`} class={`hero-image ${leadArticle.data.heroImage ? 'has-image' : ''}`}>
           {leadArticle.data.heroImage && (
             <Image src={leadArticle.data.heroImage} alt={leadArticle.data.headline.replace(/<[^>]+>/g, '')} widths={[800, 1200, 1600]} sizes="60vw" />
