@@ -1,0 +1,65 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'poptyping — reheated goodness', description = 'Reheated goodness. All headlines fictitious. Resemblance regrettable.' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+</head>
+<body class="read-mode article-mode">
+
+<!-- Minimal article masthead: just pp. + thin line -->
+<header class="article-masthead">
+  <div class="article-masthead-inner">
+    <a href="/" class="pp-mark" aria-label="poptyping home">pp.</a>
+  </div>
+</header>
+
+<slot />
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">poptyping.</div>
+        <p class="footer-tag">Reheated Goodness.</p>
+      </div>
+      <div class="footer-col">
+        <h5>The Operation</h5>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Follow</h5>
+        <ul>
+          <li><a href="#newsletter">Newsletter</a></li>
+          <li><a href="#">Twitter / X</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© {new Date().getFullYear()} poptyping. All headlines fictitious. Resemblance to reality coincidental and regrettable.</span>
+      <span><a href="/privacy/" style="color: var(--ink-faint); text-decoration: none;">Privacy</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

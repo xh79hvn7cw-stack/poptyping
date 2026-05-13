@@ -1,0 +1,41 @@
+---
+import ArticleLayout from '../layouts/ArticleLayout.astro';
+---
+
+<ArticleLayout title="Privacy — poptyping">
+
+  <header class="article-head static-head">
+    <h1 class="article-headline"><em>Privacy</em></h1>
+  </header>
+
+  <article class="article-body static-body">
+    <p>Last updated: {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+
+    <p>This is the privacy notice for poptyping.com (the "site"). It explains what data we collect from you, why, and what we do with it. We have tried to write this in plain English. Where we have failed, blame the lawyers we haven't yet hired.</p>
+
+    <h2>What we collect</h2>
+
+    <p><strong>If you subscribe to the newsletter:</strong> we collect your email address, and only your email address. This is processed by Buttondown, our newsletter provider. Their privacy policy is available at <a href="https://buttondown.com/legal/privacy">buttondown.com/legal/privacy</a>.</p>
+
+    <p><strong>If you just read the site:</strong> we don't collect anything. We don't use analytics, tracking pixels, third-party advertising, or any other identifying technology. We don't set cookies. The site is hosted by Netlify; their server logs may record your IP address and browser details for technical and security reasons, as is standard for any website. Netlify's privacy policy is at <a href="https://www.netlify.com/privacy/">netlify.com/privacy</a>.</p>
+
+    <h2>What we do with it</h2>
+
+    <p>The only thing we do with your email address is send you newsletters when we write them. We will never sell, share, or trade your email address with anyone, ever.</p>
+
+    <h2>Your rights</h2>
+
+    <p>Under UK GDPR you have the right to access, correct, or delete any personal data we hold about you. The easiest way to exercise these rights is to email <a href="mailto:hello@poptyping.com">hello@poptyping.com</a>. You can also unsubscribe from the newsletter at any time using the link at the bottom of any email we send.</p>
+
+    <h2>If you don't like how we handle your data</h2>
+
+    <p>You have the right to complain to the Information Commissioner's Office at <a href="https://ico.org.uk">ico.org.uk</a>. We would rather you complained to us first at <a href="mailto:hello@poptyping.com">hello@poptyping.com</a> so we can try to fix it.</p>
+
+    <h2>Changes to this notice</h2>
+
+    <p>If we change this notice, we'll update the date at the top of the page. If the changes are significant, we'll let newsletter subscribers know.</p>
+
+    <div class="article-end">END</div>
+  </article>
+
+</ArticleLayout>

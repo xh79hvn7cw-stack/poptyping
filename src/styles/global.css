@@ -74,10 +74,14 @@ body.read-mode .article-end::after {
   color: var(--accent-hot);
 }
 
-/* The article-tag pill: black border on cream, black text */
-body.read-mode .article-tag {
+/* The article-pill: ink border on cream, ink text */
+body.read-mode .article-pill {
   border-color: var(--ink);
   color: var(--ink);
+}
+
+body.read-mode .article-pill-sep {
+  color: var(--ink-dim);
 }
 
 /* Breadcrumb on cream */
@@ -87,6 +91,16 @@ body.read-mode .article-crumb-bar {
 }
 body.read-mode .breadcrumb { color: var(--ink-dim); }
 body.read-mode .breadcrumb a { color: var(--accent-hot); }
+
+/* Article masthead in read-mode keeps the cream/black contrast */
+body.read-mode .article-masthead {
+  background: var(--bg);
+  border-bottom-color: var(--rule);
+}
+
+body.read-mode .pp-mark {
+  color: var(--ink);
+}
 
 /* Article hero caption: invert to black-on-cream */
 body.read-mode .article-hero-caption {
@@ -861,6 +875,51 @@ footer {
   background: var(--bg);
 }
 
+/* ========== ARTICLE MASTHEAD (replaces full site chrome on article pages) ========== */
+.article-masthead {
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+}
+
+.article-masthead-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 22px 32px;
+}
+
+.pp-mark {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.15s;
+}
+
+.pp-mark:hover { opacity: 0.6; }
+
+/* ========== ARTICLE-PILL (category · date below headline) ========== */
+.article-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 32px;
+  padding: 8px 16px;
+  border: 1px solid var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+}
+
+.article-pill-sep {
+  color: var(--ink-dim);
+}
+
 .article-crumb-inner {
   max-width: var(--max-w);
   margin: 0 auto;
@@ -888,7 +947,6 @@ footer {
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
   position: relative;
   overflow: hidden;
-  border-bottom: 1px solid var(--rule);
 }
 
 .article-hero.has-image { background: var(--bg-elev); }
@@ -910,23 +968,6 @@ footer {
 
 .article-hero.has-image::before { display: none; }
 
-.article-hero::after {
-  content: "[ full-bleed hero image ]";
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: rgba(0,0,0,0.5);
-  pointer-events: none;
-}
-
-.article-hero.has-image::after { display: none; }
-
 .article-hero-caption {
   position: absolute;
   bottom: 20px;
@@ -942,30 +983,18 @@ footer {
 }
 
 .article-head {
-  max-width: 920px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 56px 32px 40px;
-}
-
-.article-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--accent);
-  margin-bottom: 28px;
-  display: inline-block;
-  padding: 4px 10px;
-  border: 1px solid var(--accent-dim);
+  padding: 80px 32px 56px;
 }
 
 .article-headline {
   font-family: 'Fraunces', serif;
-  font-size: clamp(40px, 6vw, 84px);
+  font-size: clamp(40px, 6vw, 96px);
   line-height: 0.98;
   letter-spacing: -0.03em;
   font-weight: 700;
-  margin-bottom: 32px;
+  margin-bottom: 0;
   font-variation-settings: "SOFT" 0, "opsz" 144;
   text-transform: capitalize;
 }
@@ -977,25 +1006,10 @@ footer {
   font-weight: 500;
 }
 
-.article-byline {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: center;
-  padding: 18px 0;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--ink-faint);
-}
-
 .article-body {
   max-width: 720px;
   margin: 0 auto;
-  padding: 56px 32px 80px;
+  padding: 64px 32px 80px;
 }
 
 .article-body p {
