@@ -51,7 +51,7 @@ export default async (request, context) => {
       },
       body: JSON.stringify({
         email_address: email,
-        type: 'regular',
+        type: 'unactivated',
       }),
     });
 
@@ -59,7 +59,7 @@ export default async (request, context) => {
 
     if (response.ok) {
       return new Response(
-        JSON.stringify({ success: true, message: 'Subscribed. Welcome to poptyping.' }),
+        JSON.stringify({ success: true, message: 'Check your inbox to confirm' }),
         { status: 200, headers: { 'Content-Type': 'application/json' } }
       );
     }
