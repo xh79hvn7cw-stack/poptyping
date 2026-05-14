@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
-import ArticleLayout from '../layouts/ArticleLayout.astro';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 
 export async function getStaticPaths() {
@@ -23,6 +24,7 @@ const related = allArticles
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
+// If there aren't enough related-by-category, fill in with most-recent others
 if (related.length < 3) {
   const fillers = allArticles
     .filter(a => a.id !== article.id && !related.includes(a))
@@ -34,29 +36,35 @@ if (related.length < 3) {
 const pageTitle = `${article.data.headline.replace(/<[^>]+>/g, '')} — poptyping`;
 ---
 
-<ArticleLayout title={pageTitle}>
+<Base title={pageTitle} bodyClass="read-mode">
 
-  <!-- Headline section, above the image -->
-  <header class="article-head">
-    <h1 class="article-headline" set:html={article.data.headline} />
-    <div class="article-pill">
-      <span class="article-pill-category">{article.data.category}</span>
-      <span class="article-pill-sep">·</span>
-      <span class="article-pill-date">{fmtFullDate(article.data.date)}</span>
+  <div class="article-crumb-bar">
+    <div class="article-crumb-inner">
+      <div class="breadcrumb">
+        <a href="/">← Home</a>
+        <span class="sep">/</span>
+        <span>{article.data.category}</span>
+      </div>
     </div>
-  </header>
+  </div>
 
-  <!-- Full-bleed hero image, now below headline -->
   <div class={`article-hero ${article.data.heroImage ? 'has-image' : ''}`}>
     {article.data.heroImage && (
-      <img src={article.data.heroImage} alt="" />
+      <Image src={article.data.heroImage} alt="" widths={[800, 1200, 1600, 2000]} sizes="100vw" />
     )}
     {article.data.heroCaption && (
       <span class="article-hero-caption">{article.data.heroCaption}</span>
     )}
   </div>
 
-  <!-- Body -->
+  <header class="article-head">
+    <span class="article-tag">{article.data.category}</span>
+    <h1 class="article-headline" set:html={article.data.headline} />
+    <div class="article-byline">
+      <span>{fmtFullDate(article.data.date)}</span>
+    </div>
+  </header>
+
   <article class="article-body">
     <Content />
     <div class="article-end">END</div>
@@ -79,4 +87,4 @@ const pageTitle = `${article.data.headline.replace(/<[^>]+>/g, '')} — poptypin
     </section>
   )}
 
-</ArticleLayout>
+</Base>

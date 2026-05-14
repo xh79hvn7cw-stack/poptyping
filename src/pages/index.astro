@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import Ticker from '../components/Ticker.astro';
@@ -38,7 +39,7 @@ const fmtFullDate = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric',
         </a>
         <a href={`/${leadArticle.id}/`} class={`hero-image ${leadArticle.data.heroImage ? 'has-image' : ''}`}>
           {leadArticle.data.heroImage && (
-            <img src={leadArticle.data.heroImage} alt={leadArticle.data.headline.replace(/<[^>]+>/g, '')} />
+            <Image src={leadArticle.data.heroImage} alt={leadArticle.data.headline.replace(/<[^>]+>/g, '')} widths={[800, 1200, 1600]} sizes="60vw" />
           )}
           {leadArticle.data.heroCaption && (
             <span class="hero-image-caption">{leadArticle.data.heroCaption}</span>

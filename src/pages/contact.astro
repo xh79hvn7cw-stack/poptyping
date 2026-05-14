@@ -1,8 +1,18 @@
 ---
-import ArticleLayout from '../layouts/ArticleLayout.astro';
+import Base from '../layouts/Base.astro';
 ---
 
-<ArticleLayout title="Contact — poptyping">
+<Base title="Contact — poptyping" bodyClass="read-mode">
+
+  <div class="article-crumb-bar">
+    <div class="article-crumb-inner">
+      <div class="breadcrumb">
+        <a href="/">← Home</a>
+        <span class="sep">/</span>
+        <span>Contact</span>
+      </div>
+    </div>
+  </div>
 
   <header class="article-head static-head">
     <h1 class="article-headline"><em>Contact</em></h1>
@@ -16,4 +26,4 @@ import ArticleLayout from '../layouts/ArticleLayout.astro';
     <div class="article-end">END</div>
   </article>
 
-</ArticleLayout>
+</Base>

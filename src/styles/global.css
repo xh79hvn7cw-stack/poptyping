@@ -780,19 +780,26 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-top: 4px;
+  display: block;
 }
 
-.form-message {
-  font-family: 'JetBrains Mono', monospace;
+.newsletter-form small.success {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 24px;
+  color: var(--accent);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-top: 0;
+  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
+  font-weight: 400;
+}
+
+.newsletter-form small.error {
+  color: var(--warn);
   font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
   margin-top: 8px;
-  min-height: 14px;
 }
-
-.form-message.success { color: var(--accent); }
-.form-message.error { color: var(--warn); }
 
 /* ========== FOOTER ========== */
 footer {
