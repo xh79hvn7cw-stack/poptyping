@@ -14,13 +14,19 @@ const dateString = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'sh
 
 <a href={href} class={`card ${featured ? 'feature' : ''}`}>
   <div class={`card-image ${heroImage ? 'has-image' : ''}`}>
-    {heroImage && <img src={heroImage} alt="" width="800" height="450" loading="lazy" />}
+    {heroImage && (
+      <img 
+        src={heroImage} 
+        alt={headline} 
+        width="800" 
+        height="450" 
+        loading="lazy" 
+      />
+    )}
   </div>
   <div class="card-body">
-    <span class="card-tag">{category}</span>
-    <h3 set:html={headline} />
-    <div class="card-meta">
-      <span>{dateString}</span>
-    </div>
+    <span class="category">{category}</span>
+    <h3>{headline}</h3>
+    <time datetime={date.toISOString()}>{dateString}</time>
   </div>
 </a>
