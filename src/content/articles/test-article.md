@@ -2,6 +2,7 @@
 headline: Free council plunge pools hit an estimated 1 million
 category: Investment
 date: 2026-05-12T15:38:00.000Z
+heroImage: /images/gemini_generated_image_ukuci5ukuci5ukuc.png
 featured: false
 draft: false
 ---
