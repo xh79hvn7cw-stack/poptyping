@@ -1,6 +1,5 @@
 ---
 import { getCollection, render } from 'astro:content';
-import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 
@@ -50,8 +49,8 @@ const pageTitle = `${article.data.headline.replace(/<[^>]+>/g, '')} — poptypin
 
   <div class={`article-hero ${article.data.heroImage ? 'has-image' : ''}`}>
     {article.data.heroImage && (
-      <Image src={article.data.heroImage} alt="" widths={[800, 1200, 1600, 2000]} sizes="100vw" />
-    )}
+  <img src={article.data.heroImage} alt="" width="1200" height="675" style="width: 100%; height: auto; display: block;" loading="eager" />
+)}
     {article.data.heroCaption && (
       <span class="article-hero-caption">{article.data.heroCaption}</span>
     )}
